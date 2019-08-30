@@ -54,6 +54,7 @@ def sendMessage(num, name, msg, browser):
 def startSession(browser_type, driver_path, bot, message):
     browser = driver[browser_type](executable_path=driver_path)
     browser.get('https://web.whatsapp.com/')
+    bot.reply_to(message, 'browser version ' + browser.capabilities['version'])
     print('whatsapp opened')
     print(home, os.getcwd())
     browser.save_screenshot(home + 'screenshot.png')
