@@ -21,6 +21,7 @@ else:
             'bot-token': environ['BOT_TOKEN'],
             'browser': environ['BROWSER'],
             'driver-path': environ['DRIVER_PATH'],
+            'notify-id': environ['NOTIFY_ID'],
             'url': environ['API_URL'],
             'whitelist': environ['WHITELIST'].split(',')
         }
@@ -36,7 +37,7 @@ ids = dd(lambda: [])  # List of ids to send message to
 # Decorator for authorizing ids that send certain commands
 def needs_authorization(func):
     def inner(message):
-        if message.from_user.id in data['whitelist']:
+        if str(message.from_user.id) in data['whitelist']:
             func(message)
         else:
             bot.reply_to(message, "I don't take orders from you, " + message.from_user.first_name)  # Lol
@@ -57,6 +58,7 @@ def dogbin(content):
 # Just to get ids of ppl to add to whitelist
 @bot.message_handler(commands=['id'])
 def id(message):
+    bot.reply_to(message, 'Whitelisted IDs are {}'.format(str(data['whitelist'])))
     bot.reply_to(message, 'Your ID is {}'.format(message.from_user.id))
     bot.reply_to(message, 'The group ID is {}'.format(message.chat.id))
 
@@ -162,5 +164,5 @@ def startWhatsapp(message):
 # Start ze bot
 
 print('start')
-bot.send_message('-349698878', 'Bot started')
+bot.send_message(data['notify-id'], 'Bot started')
 bot.polling()
