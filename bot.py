@@ -102,6 +102,7 @@ def setIDs(message):
         bot.reply_to(message, str(ids['nyan']))
     except:
         bot.reply_to(message, 'invalid ids')
+        ids['nyan'] = []
 
 
 # Responds to caller with the current list of names to whom message is to be sent
