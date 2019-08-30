@@ -56,6 +56,7 @@ def startSession(browser_type, driver_path):
     print('created browser instance')
     browser.get('https://web.whatsapp.com/')
     print('whatsapp opened')
+    browser.save_screenshot(home + 'screenshot.png')
 
     # Get the qr image
     waitTillElementLoaded(browser, '/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div/img')
