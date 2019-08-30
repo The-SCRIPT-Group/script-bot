@@ -3,6 +3,7 @@ import os
 import re
 from collections import defaultdict as dd
 from os import environ
+import traceback
 
 import requests
 import telebot
@@ -157,7 +158,7 @@ def startWhatsapp(message):
 
     except Exception as e:
         bot.send_message(message.chat.id, 'Houston, there is a problem')
-        print(e)
+        print(traceback.format_exc())
 
     finally:
         # Send the url to dogbin on the chat
