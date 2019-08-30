@@ -52,7 +52,7 @@ def sendMessage(num, name, msg, browser):
 
 
 def startSession(browser_type, driver_path, bot, message):
-    browser = driver[browser_type](executable_path=driver_path)
+    browser = driver[browser_type]()
     browser.get('https://web.whatsapp.com/')
     print('whatsapp opened')
     print(home, os.getcwd())
