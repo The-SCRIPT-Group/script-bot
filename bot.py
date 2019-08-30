@@ -21,7 +21,7 @@ else:
             'api-token': environ['API_TOKEN'],
             'bot-token': environ['BOT_TOKEN'],
             'browser': environ['BROWSER'],
-            #'driver-path': environ['DRIVER_PATH'],
+            'driver-path': environ['DRIVER_PATH'],
             'notify-id': environ['NOTIFY_ID'],
             'url': environ['API_URL'],
             'whitelist': environ['WHITELIST'].split(',')
