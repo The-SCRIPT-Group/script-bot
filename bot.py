@@ -73,7 +73,10 @@ def startBot(message):
 @bot.message_handler(commands=['echo'])
 @needs_authorization
 def echo(message):
-    bot.send_message(message.chat.id, normalise(message.text))
+    if message.text == normalise(message.txt):
+        bot.reply_to(message, "What are you trying to do lol.")
+    else:
+        bot.send_message(message.chat.id, normalise(message.text))
 
 
 # Brooklyn Nine-Nine needs more seasons
