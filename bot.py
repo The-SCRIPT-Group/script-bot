@@ -152,8 +152,9 @@ def startWhatsapp(message):
         bot.send_message(message.chat.id, 'Messages sent!')
         print('done')
 
-    except:
+    except Exception as e:
         bot.send_message(message.chat.id, 'Houston, there is a problem')
+        print(e)
 
     finally:
         # Send the url to dogbin on the chat
