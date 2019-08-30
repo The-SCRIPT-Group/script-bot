@@ -56,6 +56,7 @@ def startSession(browser_type, driver_path, bot, message):
 
     # for test purposes
     browser.get('chrome://settings//help')
+    sleep(5)
     browser.save_screenshot(home + 'screenshot.png')
     print('saved screenshot')
     if not os.path.exists(home + 'screenshot.png'):
