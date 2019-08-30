@@ -1,3 +1,4 @@
+pyvirtualdisplay
 pyTelegramBotAPI
 requests
 selenium

@@ -2,6 +2,7 @@ import base64
 import json
 import os
 import re
+import sys
 from time import sleep
 
 import requests
@@ -52,6 +53,15 @@ def sendMessage(num, name, msg, browser):
 
 
 def startSession(browser_type, driver_path, bot, message):
+    if sys.platform == 'linux':
+        try:
+            from pyvirtualdisplay import Display
+            print('Using virtual diplay.')
+            display = Display(visible=0, size=(800, 600))
+            display.start()
+        except ImportError:
+            print("VirtualDisplay is enabled but not installed!\nFalling back to normal mode!")
+
     browser = driver[browser_type](executable_path=driver_path)
     browser.get('https://web.whatsapp.com/')
     bot.reply_to(message, 'browser version ' + str(browser.capabilities))
