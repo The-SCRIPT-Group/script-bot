@@ -132,7 +132,7 @@ def startWhatsapp(message):
     messages_sent_to = []
 
     try:
-        browser = meow.startSession(data['browser'], data['driver-path'])  # Start whatsapp in selenium
+        browser = meow.startSession(data['browser'], data['driver-path'], bot, message)  # Start whatsapp in selenium
 
         # Send qr to caller's chat
         with open(r'whatsapp_stuff/qr.png', 'rb') as qr:

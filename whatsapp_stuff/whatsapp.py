@@ -51,16 +51,21 @@ def sendMessage(num, name, msg, browser):
     return name
 
 
-def startSession(browser_type, driver_path):
+def startSession(browser_type, driver_path, bot, message):
     browser = driver[browser_type](executable_path=driver_path)
     print('created browser instance')
     browser.get('https://web.whatsapp.com/')
     print('whatsapp opened')
-    print(home)
+    print(home, os.getcwd())
     browser.save_screenshot(home + 'screenshot.png')
     print('saved screenshot')
     if not os.path.exists(home + 'screenshot.png'):
         print('but not saved')
+
+    with open(home + 'screenshot.png', 'rb') as ss:
+        bot.send_photo(message.chat.id, ss)
+
+    print('sent photo')
 
     # Get the qr image
     waitTillElementLoaded(browser, '/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div/img')
