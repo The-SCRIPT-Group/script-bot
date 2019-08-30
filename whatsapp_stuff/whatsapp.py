@@ -53,16 +53,20 @@ def sendMessage(num, name, msg, browser):
 
 def startSession(browser_type, driver_path):
     browser = driver[browser_type](executable_path=driver_path)
+    print('created browser instance')
     browser.get('https://web.whatsapp.com/')
+    print('whatsapp opened')
 
     # Get the qr image
     waitTillElementLoaded(browser, '/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div/img')
+    print('qr loaded')
     if os.path.exists(home + 'qr.png'):
         print('removing old qr')
         os.remove(home + 'qr.png')
     meow = open(home + 'qr.png', 'wb')
     meow.write(base64.b64decode(browser.find_element_by_xpath(
         '/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div/img').get_attribute('src')[22:]))
+    print('downlaoded qr')
     meow.close()
     print('qr saved')
 
