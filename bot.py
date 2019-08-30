@@ -73,7 +73,7 @@ def startBot(message):
 @bot.message_handler(commands=['echo'])
 @needs_authorization
 def echo(message):
-    if message.text == normalise(message.txt):
+    if message.text == normalise(message.text):
         bot.reply_to(message, "What are you trying to do lol.")
     else:
         bot.send_message(message.chat.id, normalise(message.text))
