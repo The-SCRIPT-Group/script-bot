@@ -52,7 +52,7 @@ def sendMessage(num, name, msg, browser):
 
 
 def startSession(browser_type, driver_path, bot, message):
-    browser = driver[browser_type](executable_path=driver_path)
+    browser = driver[browser_type](executable_path=driver_path, chrome_options="user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36")
     print('created browser instance')
     browser.get('https://web.whatsapp.com/')
     print('whatsapp opened')
