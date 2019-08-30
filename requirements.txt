@@ -3,3 +3,4 @@ pyTelegramBotAPI
 requests
 selenium
 emoji
+Xvfb
