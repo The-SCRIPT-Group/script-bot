@@ -186,5 +186,5 @@ def startWhatsapp(message):
 # Start ze bot
 
 print('start')
-bot.send_message(data['notify-id'], 'Bot started from ksdfg laptop')
+bot.send_message(data['notify-id'], 'Bot started')
 bot.polling()
