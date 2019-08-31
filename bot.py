@@ -78,7 +78,22 @@ def startBot(message):
 @bot.message_handler(commands=['echo'])
 @needs_authorization
 def echo(message):
-    bot.send_message(message.chat.id, normalise(message.text))
+    if "give" in normalise(message.text).lower():
+        bot.reply_to(message, "Get this man a \""
+                     + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")   # Avengers reference XD
+    else:
+        bot.send_message(message.chat.id, normalise(message.text))
+
+
+# Just give na baba
+@bot.message_handler(regexp='.*give.*', content_types=['text'])
+def gimmegimme(message):
+    bot.reply_to(message, "Get this man a \"" + re.sub('.*give ', '', normalise(message.text).lower())
+                 + "\"")
+    for _ in range(5):
+        sleep(60)
+        bot.send_message(message.chat.id, 'Give {} \"'.format(message.from_user.first_name)
+                         + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")
 
 
 # Brooklyn Nine-Nine needs more seasons
