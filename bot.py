@@ -64,7 +64,7 @@ def dogbin(content):
 # meow. lots of meow.
 @bot.message_handler(commands=['start'])
 def startBot(message):
-    bot.reply_to(message, 'meow :smile_cat:')
+    bot.reply_to(message, 'meow 😸')
 
 
 # Just to get ids of ppl to add to whitelist
@@ -187,5 +187,5 @@ def startWhatsapp(message):
 # Start ze bot
 
 print('start')
-bot.send_message(data['notify-id'], 'Bot started')
+bot.send_message(data['notify-id'], 'Bot started from ksdfg laptop')
 bot.polling()
