@@ -64,15 +64,14 @@ def dogbin(content):
 # Just to get ids of ppl to add to whitelist
 @bot.message_handler(commands=['id'])
 def id(message):
-    bot.reply_to(message, 'Whitelisted IDs are {}'.format(str(data['whitelist'])))
     bot.reply_to(message, 'Your ID is {}'.format(message.from_user.id))
-    bot.reply_to(message, 'The group ID is {}'.format(message.chat.id))
+    bot.reply_to(message, 'The chat ID is {}'.format(message.chat.id))
 
 
 # Parikshit mode on
 @bot.message_handler(commands=['start'])
 def startBot(message):
-    bot.reply_to(message, 'hello ladiez')
+    bot.reply_to(message, 'meow')
 
 
 # Echo the same message back to the caller - just for fun
@@ -125,6 +124,7 @@ def setIDs(message):
 # Responds to caller with the current list of names to whom message is to be sent
 @bot.message_handler(commands=['showlist'])
 def showlist(message):
+    bot.send_message(message.chat.id, 'Please wait while we fetch list...')
     names, _ = meow.getData(data['url'], data['api-token'], ids['nyan'])
     bot.reply_to(message, 'The list of names to whom the message will be sent can be found at\n' +
                  dogbin('\n'.join(names)))
