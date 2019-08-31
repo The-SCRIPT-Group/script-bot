@@ -4,6 +4,7 @@ import re
 import traceback
 from collections import defaultdict as dd
 from os import environ
+from time import sleep
 
 import requests
 import telebot
@@ -41,7 +42,11 @@ def needs_authorization(func):
         if str(message.from_user.id) in data['whitelist']:
             func(message)
         else:
-            bot.reply_to(message, "I don't take orders from you, " + message.from_user.first_name)  # Lol
+            bot.reply_to(message, 'Kicking this idiot out in')
+            for i in range(5):
+                bot.send_message(message.chat.id, str(5-i))
+                sleep(0.5)
+            bot.kick_chat_member(message.chat.id, message.from_user.id)  # Lol
 
     return inner
 
@@ -74,10 +79,22 @@ def startBot(message):
 @bot.message_handler(commands=['echo'])
 @needs_authorization
 def echo(message):
-    if message.text == normalise(message.text):
-        bot.reply_to(message, "What are you trying to do lol.")
+    if "give" in normalise(message.text).lower():
+        bot.reply_to(message, "Get this man a \""
+                     + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")   # Avengers reference XD
     else:
         bot.send_message(message.chat.id, normalise(message.text))
+
+
+# Just give na baba
+@bot.message_handler(regexp='^give', content_types=['text'])
+def gimmegimme(message):
+    bot.reply_to(message, "Get this man a \"" + re.sub('.*give ', '', normalise(message.text).lower())
+                 + "\"")
+    for _ in range(5):
+        sleep(5)
+        bot.send_message(message.chat.id, 'Give {} \"'.format(message.from_user.first_name)
+                         + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")
 
 
 # Brooklyn Nine-Nine needs more seasons
