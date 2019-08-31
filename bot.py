@@ -91,7 +91,7 @@ def gimmegimme(message):
     bot.reply_to(message, "Get this man a \"" + re.sub('.*give ', '', normalise(message.text).lower())
                  + "\"")
     for _ in range(5):
-        sleep(60)
+        sleep(5)
         bot.send_message(message.chat.id, 'Give {} \"'.format(message.from_user.first_name)
                          + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")
 
