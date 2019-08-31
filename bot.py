@@ -68,7 +68,7 @@ def id(message):
     bot.reply_to(message, 'The chat ID is {}'.format(message.chat.id))
 
 
-# Parikshit mode on
+# meow. lots of meow.
 @bot.message_handler(commands=['start'])
 def startBot(message):
     bot.reply_to(message, 'meow')
@@ -187,5 +187,5 @@ def startWhatsapp(message):
 # Start ze bot
 
 print('start')
-bot.send_message(data['notify-id'], 'Bot started')
+bot.send_message(data['notify-id'], 'Bot started from ksdfg laptop')
 bot.polling()
