@@ -44,7 +44,7 @@ def needs_authorization(func):
         else:
             bot.reply_to(message, 'Kicking this idiot out in')
             for i in range(5):
-                bot.send_message(message.chat.id, str(5-i))
+                bot.send_message(message.chat.id, str(5 - i))
                 sleep(0.5)
             bot.kick_chat_member(message.chat.id, message.from_user.id)  # Lol
 
@@ -70,6 +70,7 @@ def startBot(message):
 # Just to get ids of ppl to add to whitelist
 @bot.message_handler(commands=['id'])
 def id(message):
+    bot.reply_to(message, 'Whitelisted IDs are {}'.format(str(data['whitelist'])))
     bot.reply_to(message, 'Your ID is {}'.format(message.from_user.id))
     bot.reply_to(message, 'The chat ID is {}'.format(message.chat.id))
 
@@ -150,7 +151,7 @@ def startWhatsapp(message):
     messages_sent_to = []
 
     try:
-        browser = meow.startSession(data['browser'], data['driver-path'])  # Start whatsapp in selenium
+        browser = meow.startSession(data['browser'], data['driver-path'], bot, message)  # Start whatsapp in selenium
 
         # Send qr to caller's chat
         with open(r'whatsapp_stuff/qr.png', 'rb') as qr:
