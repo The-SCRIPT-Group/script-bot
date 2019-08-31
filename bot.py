@@ -80,7 +80,7 @@ def id(message):
 def echo(message):
     if "give" in normalise(message.text).lower():
         bot.reply_to(message, "Get this man a \""
-                     + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")   # Avengers reference XD
+                     + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")  # Avengers reference XD
     else:
         bot.send_message(message.chat.id, normalise(message.text))
 
@@ -124,7 +124,6 @@ def setIDs(message):
 # Responds to caller with the current list of names to whom message is to be sent
 @bot.message_handler(commands=['showlist'])
 def showlist(message):
-    bot.send_message(message.chat.id, 'Please wait while we fetch list...')
     names, _ = meow.getData(data['url'], data['api-token'], ids['nyan'])
     bot.reply_to(message, 'The list of names to whom the message will be sent can be found at\n' +
                  dogbin('\n'.join(names)))
