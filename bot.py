@@ -95,6 +95,7 @@ def gimmegimme(message):
         bot.send_message(message.chat.id, 'Give {} \"'.format(message.from_user.first_name)
                          + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")
 
+
 # Brooklyn Nine-Nine needs more seasons
 @bot.message_handler(commands=['coolcoolcoolcoolcool'])
 def peralta(message):
