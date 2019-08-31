@@ -1,9 +1,9 @@
 import json
 import os
 import re
+import traceback
 from collections import defaultdict as dd
 from os import environ
-import traceback
 
 import requests
 import telebot
@@ -101,7 +101,7 @@ def setIDs(message):
         ids['nyan'] = 'all' if normalise(message.text) == 'all' else list(map(int, normalise(message.text).split()))
         bot.reply_to(message, str(ids['nyan']))
     except:
-        bot.reply_to(message, 'invalid ids')
+        bot.reply_to(message, 'invalid ids, resetting list')
         ids['nyan'] = []
 
 
