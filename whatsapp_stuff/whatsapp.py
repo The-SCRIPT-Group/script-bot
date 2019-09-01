@@ -2,7 +2,6 @@ import base64
 import json
 import os
 import re
-import sys
 from time import sleep
 
 import requests
@@ -52,37 +51,14 @@ def sendMessage(num, name, msg, browser):
     return name
 
 
-def startSession(browser_type, driver_path, bot, message):
-    if sys.platform == 'linux':
-        try:
-            from pyvirtualdisplay import Display
-            print('Using virtual diplay.')
-            display = Display(visible=0, size=(800, 600))
-            display.start()
-        except ImportError:
-            print("VirtualDisplay is enabled but not installed!\nFalling back to normal mode!")
-
+def startSession(browser_type, driver_path):
+    # create browser instance and open whatsapp
     browser = driver[browser_type](executable_path=driver_path)
     browser.get('https://web.whatsapp.com/')
-    bot.reply_to(message, 'browser version ' + str(browser.capabilities))
-    print('whatsapp opened')
-    print(home, os.getcwd())
-    browser.save_screenshot(home + 'screenshot.png')
-    print('saved screenshot')
-    if not os.path.exists(home + 'screenshot.png'):
-        print('but not saved')
-
-    with open(home + 'screenshot.png', 'rb') as ss:
-        bot.send_photo(message.chat.id, ss)
-
-    print('sent photo')
 
     # Get the qr image
     waitTillElementLoaded(browser, '/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div/img')
     print('qr loaded')
-    if os.path.exists(home + 'qr.png'):
-        print('removing old qr')
-        os.remove(home + 'qr.png')
     meow = open(home + 'qr.png', 'wb')
     meow.write(base64.b64decode(browser.find_element_by_xpath(
         '/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div/img').get_attribute('src')[22:]))

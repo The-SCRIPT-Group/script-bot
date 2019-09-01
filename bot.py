@@ -150,15 +150,15 @@ def startWhatsapp(message):
     messages_sent_to = []
 
     try:
-        browser = meow.startSession(data['browser'], data['driver-path'], bot, message)  # Start whatsapp in selenium
+        browser = meow.startSession(data['browser'], data['driver-path'])  # Start whatsapp in selenium
 
         # Send qr to caller's chat
         with open(r'whatsapp_stuff/qr.png', 'rb') as qr:
             bot.send_photo(message.from_user.id, qr)
         bot.send_message(message.chat.id, 'The QR code has been sent to ' + message.from_user.first_name)
 
-        # Wait till the text box is loaded onto the screen
-        meow.waitTillElementLoaded(browser, '/html/body/div[1]/div/div/div[4]/div/div/div[1]')
+        # Wait till the search chat text box is loaded onto the screen
+        meow.waitTillElementLoaded(browser, '/html/body/div[1]/div/div/div[3]/div/div[1]/div/label/input')
 
         # Get data from our API
         names, numbers = meow.getData(data['url'], data['api-token'], ids['nyan'])
