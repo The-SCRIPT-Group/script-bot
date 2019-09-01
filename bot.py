@@ -70,7 +70,6 @@ def startBot(message):
 # Just to get ids of ppl to add to whitelist
 @bot.message_handler(commands=['id'])
 def id(message):
-    bot.reply_to(message, 'Whitelisted IDs are {}'.format(str(data['whitelist'])))
     bot.reply_to(message, 'Your ID is {}'.format(message.from_user.id))
     bot.reply_to(message, 'The chat ID is {}'.format(message.chat.id))
 
