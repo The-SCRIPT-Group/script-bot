@@ -80,20 +80,20 @@ def startBot(message):
 def echo(message):
     if "give" in normalise(message.text).lower():
         bot.reply_to(message, "Get this man a \""
-                     + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")   # Avengers reference XD
+                     + re.sub('^give ', '', normalise(message.text)) + "\"")   # Avengers reference XD
     else:
         bot.send_message(message.chat.id, normalise(message.text))
 
 
 # Just give na baba
-@bot.message_handler(regexp='.*give.*', content_types=['text'])
+@bot.message_handler(regexp='^give.*', content_types=['text'])
 def gimmegimme(message):
-    bot.reply_to(message, "Get this man a \"" + re.sub('.*give ', '', normalise(message.text).lower())
+    bot.reply_to(message, "Get this man a \"" + re.sub('^give ', '', normalise(message.text))
                  + "\"")
     for _ in range(5):
-        sleep(60)
+        sleep(1)
         bot.send_message(message.chat.id, 'Give {} \"'.format(message.from_user.first_name)
-                         + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")
+                         + re.sub('^give ', '', normalise(message.text)) + "\"")
 
 
 # Brooklyn Nine-Nine needs more seasons
