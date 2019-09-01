@@ -27,6 +27,7 @@ else:
             'url': environ['API_URL'],
             'whitelist': environ['WHITELIST'].split(',')
         }
+        os.system('startx')
     except KeyError:
         print("You don't have configuration JSON or environment variables set, go away")
         exit(1)
