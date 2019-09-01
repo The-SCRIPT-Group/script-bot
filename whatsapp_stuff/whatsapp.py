@@ -57,7 +57,7 @@ def startSession(browser_type, driver_path, bot, message):
         try:
             from pyvirtualdisplay import Display
             print('Using virtual diplay.')
-            display = Display(visible=0, size=(800, 600))
+            display = Display(visible=0, size=(800, 600), use_xauth=True)
             display.start()
         except ImportError:
             print("VirtualDisplay is enabled but not installed!\nFalling back to normal mode!")

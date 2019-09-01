@@ -1,3 +1,4 @@
 xvfb
-x11-utils
-xorg
+xserver-xephyr
+vnc4server
+xauth
