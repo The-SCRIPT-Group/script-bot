@@ -93,7 +93,7 @@ def gimmegimme(message):
     for _ in range(5):
         sleep(1)
         bot.send_message(message.chat.id, 'Give {} \"'.format(message.from_user.first_name)
-                         + re.sub('^give ', '', normalise(message.text)) + "\"")
+                         + re.sub('^[g,G][i,I][v,V][e,E] ', '', normalise(message.text)) + "\"")
 
 
 # Brooklyn Nine-Nine needs more seasons
