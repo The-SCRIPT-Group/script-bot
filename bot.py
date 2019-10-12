@@ -27,6 +27,7 @@ else:
             'url': environ['API_URL'],
             'whitelist': environ['WHITELIST'].split(',')
         }
+        os.system('startx')
     except KeyError:
         print("You don't have configuration JSON or environment variables set, go away")
         exit(1)
@@ -44,7 +45,7 @@ def needs_authorization(func):
         else:
             bot.reply_to(message, 'Kicking this idiot out in')
             for i in range(5):
-                bot.send_message(message.chat.id, str(5-i))
+                bot.send_message(message.chat.id, str(5 - i))
                 sleep(0.5)
             bot.kick_chat_member(message.chat.id, message.from_user.id)  # Lol
 
@@ -150,7 +151,7 @@ def startWhatsapp(message):
     messages_sent_to = []
 
     try:
-        browser = meow.startSession(data['browser'], data['driver-path'])  # Start whatsapp in selenium
+        browser = meow.startSession(data['browser'], data['driver-path'], bot, message)  # Start whatsapp in selenium
 
         # Send qr to caller's chat
         with open(r'whatsapp_stuff/qr.png', 'rb') as qr:
