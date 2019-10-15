@@ -41,11 +41,7 @@ def needs_authorization(func):
         if str(message.from_user.id) in data['whitelist']:
             func(message)
         else:
-            bot.reply_to(message, 'Kicking this idiot out in')
-            for i in range(5):
-                bot.send_message(message.chat.id, str(5-i))
-                sleep(0.5)
-            bot.kick_chat_member(message.chat.id, message.from_user.id)  # Lol
+            bot.reply_to(message, 'Not allowed. Go cry to your mama, or suck rittmang to get whitelisted')
 
     return inner
 
@@ -80,7 +76,7 @@ def startBot(message):
 def echo(message):
     if "give" in normalise(message.text).lower():
         bot.reply_to(message, "Get this man a \""
-                     + re.sub('^give ', '', normalise(message.text)) + "\"")   # Avengers reference XD
+                     + re.sub('^give ', '', normalise(message.text)) + "\"")  # Avengers reference XD
     else:
         bot.send_message(message.chat.id, normalise(message.text))
 
