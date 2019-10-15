@@ -47,8 +47,8 @@ def sendMessage(num, name, msg, browser):
     waitTillElementLoaded(browser, '//*[@id="action-button"]')  # Wait till send message button is loaded
     browser.find_element_by_xpath('//*[@id="action-button"]').click()  # Click on "send message" button
 
-    waitTillLinkLoaded(browser, "use WhatsApp Web")
-    browser.find_element_by_link_text("use WhatsApp Web").click()
+    waitTillLinkLoaded(browser, "use WhatsApp Web")  # wait till the link is loaded
+    browser.find_element_by_link_text("use WhatsApp Web").click()  # click on link to open chat
 
     # Wait till the text box is loaded onto the screen, then type out and send the full message
     waitTillElementLoaded(browser, '/html/body/div[1]/div/div/div[4]/div/footer/div[1]/div[2]/div/div[2]')
