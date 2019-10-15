@@ -1,7 +1,6 @@
 import json
 import os
 import re
-import traceback
 from collections import defaultdict as dd
 from os import environ
 from time import sleep
@@ -27,7 +26,6 @@ else:
             'url': environ['API_URL'],
             'whitelist': environ['WHITELIST'].split(',')
         }
-        os.system('startx')
     except KeyError:
         print("You don't have configuration JSON or environment variables set, go away")
         exit(1)
@@ -43,11 +41,7 @@ def needs_authorization(func):
         if str(message.from_user.id) in data['whitelist']:
             func(message)
         else:
-            bot.reply_to(message, 'Kicking this idiot out in')
-            for i in range(5):
-                bot.send_message(message.chat.id, str(5 - i))
-                sleep(0.5)
-            bot.kick_chat_member(message.chat.id, message.from_user.id)  # Lol
+            bot.reply_to(message, 'Not allowed. Go cry to your mama, or suck rittmang to get whitelisted')
 
     return inner
 
@@ -87,14 +81,14 @@ def echo(message):
 
 
 # Just give na baba
-@bot.message_handler(regexp='^give', content_types=['text'])
+@bot.message_handler(regexp='^give.*', content_types=['text'])
 def gimmegimme(message):
-    bot.reply_to(message, "Get this man a \"" + re.sub('.*give ', '', normalise(message.text).lower())
+    bot.reply_to(message, "Get this man a \"" + re.sub('^give ', '', normalise(message.text))
                  + "\"")
     for _ in range(5):
-        sleep(5)
+        sleep(1)
         bot.send_message(message.chat.id, 'Give {} \"'.format(message.from_user.first_name)
-                         + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")
+                         + re.sub('^[g,G][i,I][v,V][e,E] ', '', normalise(message.text)) + "\"")
 
 
 # Brooklyn Nine-Nine needs more seasons
@@ -158,8 +152,8 @@ def startWhatsapp(message):
             bot.send_photo(message.from_user.id, qr)
         bot.send_message(message.chat.id, 'The QR code has been sent to ' + message.from_user.first_name)
 
-        # Wait till the search chat text box is loaded onto the screen
-        meow.waitTillElementLoaded(browser, '/html/body/div[1]/div/div/div[3]/div/div[1]/div/label/input')
+        # Wait till the text box is loaded onto the screen
+        meow.waitTillElementLoaded(browser, '/html/body/div[1]/div/div/div[4]/div/div/div[1]')
 
         # Get data from our API
         names, numbers = meow.getData(data['url'], data['api-token'], ids['nyan'])
@@ -176,7 +170,7 @@ def startWhatsapp(message):
 
     except Exception as e:
         bot.send_message(message.chat.id, 'Houston, there is a problem')
-        print(traceback.format_exc())
+        print(e)
 
     finally:
         # Send the url to dogbin on the chat
