@@ -5,3 +5,5 @@ geckodriver.log
 data.json
 geckodriver.exe
 whatsapp_stuff/__pycache__/
+.env
+*.iml
