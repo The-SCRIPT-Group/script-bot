@@ -1,6 +1,4 @@
-pyvirtualdisplay
 pyTelegramBotAPI
 requests
 selenium
 emoji
-xvfbwrapper
