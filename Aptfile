@@ -1,4 +1,0 @@
-xvfb
-xserver-xephyr
-vnc4server
-xauth
