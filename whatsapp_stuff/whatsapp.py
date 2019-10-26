@@ -62,6 +62,7 @@ def sendMessage(num, name, msg, browser):
     return name
 
 
+# Method to start a new session of WhatsApp Web
 def startSession(browser_type, driver_path, bot, message):
     browser = driver[browser_type](executable_path=driver_path)
     browser.get('https://web.whatsapp.com/')
