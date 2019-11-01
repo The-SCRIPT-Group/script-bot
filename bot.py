@@ -83,7 +83,7 @@ def echo(message):
 # Just give na baba
 @bot.message_handler(regexp='^give.*', content_types=['text'])
 def gimmegimme(message):
-    bot.reply_to(message, "Get this man a \"" + re.sub('^give ', '', normalise(message.text))
+    bot.reply_to(message, "Get this man a \"" + re.sub('^[g,G][i,I][v,V][e,E] ', '', normalise(message.text))
                  + "\"")
     for _ in range(5):
         sleep(1)
