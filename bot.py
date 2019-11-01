@@ -56,10 +56,10 @@ def dogbin(content):
                                                                 content).content.decode())['key'])
 
 
-# meow. lots of meow.
+# No meow ksdfg
 @bot.message_handler(commands=['start'])
 def startBot(message):
-    bot.reply_to(message, 'meow 😸')
+    bot.reply_to(message, 'Hello ladiej')
 
 
 # Just to get ids of ppl to add to whitelist
