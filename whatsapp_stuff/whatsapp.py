@@ -66,12 +66,13 @@ def sendMessage(num, name, msg, browser):
 def startSession(browser_type, driver_path, bot, message):
     bot.reply_to(message, os.getcwd())
     options = driver[browser_type][1]()
+    options.headless = True
     options.add_argument("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36")
     browser = driver[browser_type][0](executable_path=driver_path, options=options)
     browser.get('https://web.whatsapp.com/')
     browser.save_screenshot('ss.png')
     print('whatsapp opened')
-    with open(home+'ss.png', 'rb') as ss:
+    with open('ss.png', 'rb') as ss:
         bot.send_photo(message.chat.id, ss)
 
     # Get the qr image
@@ -92,7 +93,7 @@ def getData(url, token, ids):
     numbers_list = []  # List of all numbers
 
     # Get data from our API
-    api_data = json.loads(requests.get(url, headers={'Authorization': token}, ).text)
+    api_data = json.loads(requests.get(url, headers={'Authorization': token}).text)
 
     if ids == 'all':
         ids = map(int, api_data.keys())
