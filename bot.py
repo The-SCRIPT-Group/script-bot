@@ -30,7 +30,7 @@ else:
         print("You don't have configuration JSON or environment variables set, go away")
         exit(1)
 
-bot = telebot.TeleBot(data['bot-token'])  # Create bot object
+bot = telebot.AsyncTeleBot(data['bot-token'])  # Create bot object
 
 ids = dd(lambda: [])  # List of ids to send message to
 
