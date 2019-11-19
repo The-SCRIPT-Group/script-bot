@@ -64,7 +64,6 @@ def sendMessage(num, name, msg, browser):
 
 # Method to start a new session of WhatsApp Web
 def startSession(browser_type, driver_path, bot, message):
-    bot.reply_to(message, os.getcwd())
     options = driver[browser_type][1]()
     options.headless = True
     options.add_argument("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36")
@@ -96,12 +95,12 @@ def getData(url, token, ids):
     api_data = json.loads(requests.get(url, headers={'Authorization': token}).text)
 
     if ids == 'all':
-        ids = map(int, api_data.keys())
+        ids = list(map(lambda x: x['id'], api_data))
 
     # Add names and numbers to respective lists
-    for user_id in api_data:
-        if int(user_id) in ids:
-            names_list.append(api_data[user_id]['name'])
-            numbers_list.append(api_data[user_id]['phone'].split('|')[-1])
+    for user in api_data:
+        if int(user['id']) in ids:
+            names_list.append(user['name'])
+            numbers_list.append(user['phone'].split('|')[-1])
 
     return names_list, numbers_list
