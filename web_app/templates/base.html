@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>S.C.R.I.P.T WhatsApp bot</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body class="w3-black">
+<h1 class="w3-center">WhatsApp Bot</h1>
+<div class="w3-bar w3-red">
+    <p></p>
+</div>
+<br><br>
+<div class="w3-container">
+    {% block full_page_content %}
+        <div class="w3-row">
+            <div class="w3-col l2 w3-hide-small"><p></p></div>
+            <div class="w3-col l8 w3-center w3-margin-top">
+                {% block page_content %}{% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+</div>
+</body>
+</html>

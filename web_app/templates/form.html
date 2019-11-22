@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+    <form class="w3-xlarge w3-padding-64" method="post" action="/send">
+        <label>
+            <input class="w3-input w3-hover-red w3-round-xxlarge" name="ids" placeholder="ids"
+                   style="text-align: center; width: 50%; border: hidden; margin-right: auto; margin-left: auto">
+            <br>
+        </label>
+        <label>
+            <input class="w3-input w3-hover-red w3-round-xxlarge" name="password" placeholder="password"
+                   style="text-align: center; width: 50%; border: hidden; margin-right: auto; margin-left: auto">
+            <br>
+        </label>
+        <input class="w3-button w3-red w3-round-xxlarge" type="submit" value="LOGIN" style="width: 130px">
+    </form>
+{% endblock %}

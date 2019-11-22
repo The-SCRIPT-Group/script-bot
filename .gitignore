@@ -1,6 +1,6 @@
 venv
 .idea/
-qr.png
+*.png
 geckodriver.log
 data.json
 geckodriver.exe
