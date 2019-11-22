@@ -16,6 +16,13 @@ whatsapp_api = 'https://api.whatsapp.com/send?phone=91'  # Format of url to open
 
 home = '' if re.match('.+whatsapp_stuff', os.getcwd()) else 'whatsapp_stuff/'
 
+
+# reset home to some other folder
+def set_home(path):
+    global home
+    home = path
+
+
 driver = {
     'firefox': [webdriver.Firefox, webdriver.FirefoxOptions],
     'chrome': [webdriver.Chrome, webdriver.ChromeOptions]
@@ -85,6 +92,25 @@ def startSession(browser_type, driver_path, bot, message):
     print('qr saved')
 
     return browser
+
+
+# Method to start a new session of WhatsApp Web for web app
+def startWebSession(browser_type, driver_path):
+    options = driver[browser_type][1]()
+    options.add_argument(
+        "user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36")
+    options.headless = True
+    browser = driver[browser_type][0](executable_path=driver_path, options=options)
+    browser.get('https://web.whatsapp.com/')
+    print('whatsapp opened')
+
+    # Get the qr image
+    waitTillElementLoaded(browser, '/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div/img')
+    qr = browser.find_element_by_xpath(
+        '/html/body/div[1]/div/div/div[2]/div[1]/div/div[2]/div/img').get_attribute('src')
+    print('qr saved')
+
+    return browser, qr
 
 
 def getData(url, token, ids):

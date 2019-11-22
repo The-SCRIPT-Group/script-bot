@@ -1,3 +1,5 @@
+waitress
+flask
 pyTelegramBotAPI
 requests
 selenium
