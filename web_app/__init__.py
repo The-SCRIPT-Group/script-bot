@@ -6,6 +6,7 @@ from string import ascii_letters
 from emoji import demojize
 from flask import Flask, render_template, session, request, redirect, url_for
 from requests import get, post
+from selenium.common.exceptions import TimeoutException
 
 from whatsapp_stuff import whatsapp as meow
 
@@ -104,6 +105,7 @@ def send():
     )
 
     messages_sent_to = []
+    messages_not_sent_to = []
 
     try:
         # Wait till the text box is loaded onto the screen
@@ -118,7 +120,11 @@ def send():
 
         # Send messages to all entries in file
         for num, name in zip(numbers, names):
-            messages_sent_to.append(meow.sendMessage(num, name, msg, browser[session['id']]))
+            try:
+                messages_sent_to.append(meow.sendMessage(num, name, msg, browser[session['id']], time=30))
+            except TimeoutException:
+                print("chat could not be loaded for", name)
+                messages_not_sent_to.append(name)
 
         # Close browser
         browser[session['id']].close()
@@ -128,6 +134,11 @@ def send():
         print(e)
 
     finally:
+        sent_list = dogbin('\n'.join(messages_sent_to))
+        not_sent_list = dogbin('\n'.join(messages_not_sent_to))
         # Send the url to dogbin on the chat
-        return 'The list of names to whom the message was sent can be found ' + \
-               '<a href="' + dogbin('\n'.join(messages_sent_to)) + '">here</a>'
+        return f"""
+                The list of names to whom the message was sent can be found <a href="{sent_list}">here</a>
+                <br><br>
+                The list of names to whom the message could not be sent can be found <a href="{not_sent_list}">here</a>
+               """
