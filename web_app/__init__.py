@@ -12,13 +12,12 @@ from whatsapp_stuff import whatsapp as meow
 
 app = Flask('whatsapp bot')
 app.secret_key = 'telegram_api_is_weird'
+app.template_folder = os.path.join('web_app', app.template_folder)
 browser = {}
 
-meow.set_home(os.path.join(app.static_folder, 'images', ''))
-
 # Get config data from json / env
-if os.path.exists(os.getcwd().replace('web_app', '').replace('\\', '/') + r'whatsapp_stuff/data.json'):
-    with open(os.getcwd().replace('web_app', '').replace('\\', '/') + r'whatsapp_stuff/data.json', 'r') as f:
+if os.path.exists(os.getcwd().replace('web_app', '').replace('\\', '/') + r'/whatsapp_stuff/data.json'):
+    with open(os.getcwd().replace('web_app', '').replace('\\', '/') + r'/whatsapp_stuff/data.json', 'r') as f:
         data = json.load(f)
 else:
     try:
