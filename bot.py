@@ -3,7 +3,6 @@ import os
 import re
 from collections import defaultdict as dd
 from os import environ
-from time import sleep
 
 import requests
 import telebot
@@ -78,6 +77,12 @@ def echo(message):
                      + re.sub('.*give ', '', normalise(message.text).lower()) + "\"")  # Avengers reference XD
     else:
         bot.send_message(message.chat.id, normalise(message.text))
+
+
+# Just give na baba
+@bot.message_handler(regexp='^give.*', content_types=['text'])
+def gimmegimme(message):
+    bot.delete_message(message.chat.id, message.message_id)
 
 
 # Brooklyn Nine-Nine needs more seasons
