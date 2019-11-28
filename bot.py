@@ -80,17 +80,6 @@ def echo(message):
         bot.send_message(message.chat.id, normalise(message.text))
 
 
-# Just give na baba
-@bot.message_handler(regexp='^give.*', content_types=['text'])
-def gimmegimme(message):
-    bot.reply_to(message, "Get this man " + re.sub('^[g,G][i,I][v,V][e,E] ', '', normalise(message.text)))
-    for _ in range(5):
-        # sleep(5)
-        # bot.send_message(message.chat.id, 'Give {} '.format(message.from_user.first_name)
-        #                 + re.sub('^[g,G][i,I][v,V][e,E] ', '', normalise(message.text)))
-        bot.reply_to(message, 'fuck off mate')
-
-
 # Brooklyn Nine-Nine needs more seasons
 @bot.message_handler(commands=['coolcoolcoolcoolcool'])
 def peralta(message):
