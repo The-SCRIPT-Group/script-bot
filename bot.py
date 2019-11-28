@@ -85,7 +85,7 @@ def echo(message):
 def gimmegimme(message):
     bot.reply_to(message, "Get this man " + re.sub('^[g,G][i,I][v,V][e,E] ', '', normalise(message.text)))
     for _ in range(5):
-        sleep(5)
+        # sleep(5)
         # bot.send_message(message.chat.id, 'Give {} '.format(message.from_user.first_name)
         #                 + re.sub('^[g,G][i,I][v,V][e,E] ', '', normalise(message.text)))
         bot.reply_to(message, 'fuck off mate')
