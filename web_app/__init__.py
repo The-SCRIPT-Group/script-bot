@@ -12,6 +12,8 @@ from whatsapp_stuff import whatsapp as meow
 
 app = Flask('whatsapp bot')
 app.secret_key = 'telegram_api_is_weird'
+app.template_folder = os.path.join(os.getcwd(), 'web_app', 'templates')
+app.static_folder = os.path.join(os.getcwd(), 'web_app', 'static')
 browser = {}
 
 # Get config data from json / env
