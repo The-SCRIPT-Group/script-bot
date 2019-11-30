@@ -1,9 +1,7 @@
 # script-bot
 
-This is a Telegram bot that sends messages to multiple WhatsApp users at once.
+This a telegram bot by The SCRIPT Group for use in its groups
 
-- It retrieves list of recipients from upstream (any API returning a JSON response)
+Doesn't do anything to special, just some stuff we like
 
-- It can send only to some valid user_ids
-
-- The message to be sent is set while invoking the bot to send messages
+Can be found on Telegram [here](https://t.me/thescriptgroup_bot)
