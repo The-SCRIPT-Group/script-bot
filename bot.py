@@ -93,12 +93,6 @@ def echo(message):
         bot.send_message(message.chat.id, normalise(message.text))
 
 
-# Just give na baba
-@bot.message_handler(regexp='^give.*', content_types=['text'])
-def gimmegimme(message):
-    bot.delete_message(message.chat.id, message.message_id)
-
-
 # Brooklyn Nine-Nine needs more seasons
 @bot.message_handler(commands=['coolcoolcoolcoolcool'])
 def peralta(message):
