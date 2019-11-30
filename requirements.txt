@@ -1,7 +1,4 @@
-waitress
-flask
 pyTelegramBotAPI
 requests
 selenium
 emoji
-gunicorn

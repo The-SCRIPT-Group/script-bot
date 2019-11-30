@@ -6,21 +6,16 @@ from os import environ
 
 import requests
 import telebot
-from emoji import demojize
-
-import whatsapp_stuff.whatsapp as meow
 
 # Get config data from json / env
-if os.path.exists(r'whatsapp_stuff/data.json'):
-    with open(r'whatsapp_stuff/data.json', 'r') as f:
+if os.path.exists(r'data.json'):
+    with open(r'data.json', 'r') as f:
         data = json.load(f)
 else:
     try:
         data = {
             'api-token': environ['API_TOKEN'],
             'bot-token': environ['BOT_TOKEN'],
-            'browser': environ['BROWSER'],
-            'driver-path': environ['DRIVER_PATH'],
             'notify-id': environ['NOTIFY_ID'],
             'url': environ['API_URL'],
             'whitelist': environ['WHITELIST'].split(',')
@@ -53,6 +48,25 @@ def dogbin(content):
     # Save names of who all are gonna get messages in dogbin
     return 'https://del.dog/{}'.format(json.loads(requests.post("https://del.dog/documents",
                                                                 content).content.decode())['key'])
+
+
+def getData(url, token, ids):
+    names_list = []  # List of all names
+    numbers_list = []  # List of all numbers
+
+    # Get data from our API
+    api_data = json.loads(requests.get(url, headers={'Authorization': token}).text)
+
+    if ids == 'all':
+        ids = list(map(lambda x: x['id'], api_data))
+
+    # Add names and numbers to respective lists
+    for user in api_data:
+        if int(user['id']) in ids:
+            names_list.append(user['name'])
+            numbers_list.append(user['phone'].split('|')[-1])
+
+    return names_list, numbers_list
 
 
 # No meow ksdfg
@@ -97,83 +111,15 @@ def showURL(message):
     bot.reply_to(message, data['url'])
 
 
-# Set which user ids will get the message once WhatsApp is run
-@bot.message_handler(commands=['setids'])
-@needs_authorization
-def setIDs(message):
-    try:
-        # Set to all - it will send to all user_ids fetched from API call to URL
-        ids['nyan'] = 'all' if normalise(message.text) == 'all' else list(map(int, normalise(message.text).split()))
-        bot.reply_to(message, str(ids['nyan']))
-    except:
-        bot.reply_to(message, 'invalid ids, resetting list')
-        ids['nyan'] = []
-
-
 # Responds to caller with the current list of names to whom message is to be sent
 @bot.message_handler(commands=['showlist'])
 def showlist(message):
-    names, _ = meow.getData(data['url'], data['api-token'], ids['nyan'])
+    names, _ = getData(data['url'], data['api-token'], ids['nyan'])
     bot.reply_to(message, 'The list of names to whom the message will be sent can be found at\n' +
                  dogbin('\n'.join(names)))
 
 
-# Start sending whatsapp message
-@bot.message_handler(commands=['whatsapp'])
-@needs_authorization
-def startWhatsapp(message):
-    """
-    set the message in the format -
-    Hey name :wave:
-    <msg taken from command call>
-    - SCRIPT bot :robot_face:
-    """
-    msg = (
-            'Hey, {} :wave:\n' +
-            demojize(normalise(message.text)) + '\n' +
-            '- SCRIPT bot :robot_face:\n'
-    )
-
-    bot.reply_to(message, 'Please wait while we fetch the QR code...')
-
-    messages_sent_to = []
-
-    try:
-        browser = meow.startSession(data['browser'], data['driver-path'], bot, message)  # Start whatsapp in selenium
-
-        # Send qr to caller's chat
-        with open(r'whatsapp_stuff/qr.png', 'rb') as qr:
-            bot.send_photo(message.from_user.id, qr)
-        bot.send_message(message.chat.id, 'The QR code has been sent to ' + message.from_user.first_name)
-
-        # Wait till the text box is loaded onto the screen
-        meow.waitTillElementLoaded(browser, '/html/body/div[1]/div/div/div[4]/div/div/div[1]')
-
-        # Get data from our API
-        names, numbers = meow.getData(data['url'], data['api-token'], ids['nyan'])
-
-        # Send messages to all entries in file
-        for num, name in zip(numbers, names):
-            messages_sent_to.append(meow.sendMessage(num, name, msg, browser))
-
-        browser.close()  # Work done, close selenium
-
-        # Send confirmation messages
-        bot.send_message(message.chat.id, 'Messages sent!')
-        print('done')
-
-    except Exception as e:
-        bot.send_message(message.chat.id, 'Houston, there is a problem')
-        print(e)
-
-    finally:
-        # Send the url to dogbin on the chat
-        bot.send_message(message.chat.id, 'The list of names to whom the message was sent can be found at\n' +
-                         dogbin('\n'.join(messages_sent_to)))
-
-
 # Start ze bot
-
 print('start')
 bot.send_message(data['notify-id'], 'Bot started')
 bot.polling()
