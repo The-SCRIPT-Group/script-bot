@@ -67,6 +67,12 @@ def getData(url, token, ids):
             numbers_list.append(user['phone'].split('|')[-1])
 
     return names_list, numbers_list
+    
+    
+# Just to piss of Pranav
+@bot.message_handler(func=lambda message: str(message.from_user.id) == '893696358')
+def piss_of_bakre(message):
+    bot.reply_to(message, "no u bish")
 
 
 # No meow ksdfg
@@ -111,12 +117,6 @@ def showlist(message):
     names, _ = getData(data['url'], data['api-token'], ids['nyan'])
     bot.reply_to(message, 'The list of names to whom the message will be sent can be found at\n' +
                  dogbin('\n'.join(names)))
-    
-    
-# Just to piss of Pranav
-@bot.message_handler(func=lambda message: str(message.from_user.id) == '893696358')
-def piss_of_bakre(message):
-    bot.reply_to(message, "no u bish")
 
 
 # Start ze bot
