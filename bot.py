@@ -73,6 +73,13 @@ def getData(url, token, ids):
 @bot.message_handler(commands=['start'])
 def startBot(message):
     bot.reply_to(message, 'Hello ladiej')
+    
+    
+# Just to piss of Pranav
+@bot.message_handler(regexp=".*")
+def piss_of_bakre(message):
+    if str(message.from_user.id) == "893696358":
+        bot.reply_to(message, "no u bish")
 
 
 # Just to get ids of ppl to add to whitelist
