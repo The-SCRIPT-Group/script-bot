@@ -114,10 +114,9 @@ def showlist(message):
     
     
 # Just to piss of Pranav
-@bot.message_handler(func=lambda message: True)
+@bot.message_handler(func=lambda message: str(message.from_user.id) == '893696358')
 def piss_of_bakre(message):
-    if str(message.from_user.id) == "893696358":
-        bot.reply_to(message, "no u bish")
+    bot.reply_to(message, "no u bish")
 
 
 # Start ze bot
