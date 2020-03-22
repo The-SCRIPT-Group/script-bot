@@ -73,13 +73,6 @@ def getData(url, token, ids):
 @bot.message_handler(commands=['start'])
 def startBot(message):
     bot.reply_to(message, 'Hello ladiej')
-    
-    
-# Just to piss of Pranav
-@bot.message_handler(regexp=".*")
-def piss_of_bakre(message):
-    if str(message.from_user.id) == "893696358":
-        bot.reply_to(message, "no u bish")
 
 
 # Just to get ids of ppl to add to whitelist
@@ -118,6 +111,13 @@ def showlist(message):
     names, _ = getData(data['url'], data['api-token'], ids['nyan'])
     bot.reply_to(message, 'The list of names to whom the message will be sent can be found at\n' +
                  dogbin('\n'.join(names)))
+    
+    
+# Just to piss of Pranav
+@bot.message_handler(func=lambda message: True)
+def piss_of_bakre(message):
+    if str(message.from_user.id) == "893696358":
+        bot.reply_to(message, "no u bish")
 
 
 # Start ze bot
