@@ -42,11 +42,6 @@ def normalise(txt):
     return re.sub('^/\w+[ ,\n]', '', txt)  # To remove the /command@botname from message.text
     
     
-# Just to piss of Pranav
-@bot.message_handler(func=lambda message: str(message.from_user.id) == '893696358')
-def piss_off_bakre(message):
-    if "ksdfg" in message.text:
-        bot.reply_to(message, "@ksdfg1247 is a prick")
 
 
 # No meow ksdfg
