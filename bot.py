@@ -72,7 +72,7 @@ def getData(url, token, ids):
 # Just to piss of Pranav
 @bot.message_handler(func=lambda message: str(message.from_user.id) == '893696358')
 def piss_of_bakre(message):
-    bot.reply_to(message, "no u bish")
+    bot.reply_to(message, "ksdfg is a bastard")
 
 
 # No meow ksdfg
