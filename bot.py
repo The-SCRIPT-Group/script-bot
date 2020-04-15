@@ -45,7 +45,8 @@ def normalise(txt):
 # Just to piss of Pranav
 @bot.message_handler(func=lambda message: str(message.from_user.id) == '893696358')
 def piss_off_bakre(message):
-    bot.reply_to(message, "curse you gay toothpick")
+    if "ksdfg" in message.text:
+        bot.reply_to(message, "@ksdfg1247 is a prick")
 
 
 # No meow ksdfg
